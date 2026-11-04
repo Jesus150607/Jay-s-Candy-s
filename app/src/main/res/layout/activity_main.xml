@@ -23,13 +23,12 @@
             android:clipChildren="false"
             android:orientation="vertical">
 
-            <!-- Encabezado -->
+
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="210dp"
                 android:background="@drawable/bg_encabezado_curvo">
 
-                <!-- Botón menú -->
                 <ImageView
                     android:id="@+id/btnMenu"
                     android:layout_width="44dp"

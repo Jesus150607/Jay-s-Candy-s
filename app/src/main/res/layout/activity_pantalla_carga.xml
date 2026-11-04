@@ -8,7 +8,7 @@
     android:background="@drawable/bg_carga"
     tools:context=".PantallaCarga">
 
-    <!-- Brillo detrás del logo -->
+
     <ImageView
         android:id="@+id/ivBrillo"
         android:layout_width="380dp"
@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.36" />
 
-    <!-- Dulces decorativos -->
+
     <ImageView
         android:layout_width="100dp"
         android:layout_height="67dp"

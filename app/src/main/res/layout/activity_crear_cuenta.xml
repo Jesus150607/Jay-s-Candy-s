@@ -9,14 +9,13 @@
     android:clipToPadding="false"
     android:fillViewport="true"
     android:overScrollMode="never"
-    tools:context=".crear_cuenta">
+    tools:context=".CrearCuenta">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- Encabezado corto -->
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="150dp"
