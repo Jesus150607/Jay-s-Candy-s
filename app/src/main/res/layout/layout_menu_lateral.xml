@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blanco"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:background="@drawable/bg_encabezado_curvo">
+
+        <ImageView
+            android:id="@+id/btnCerrarMenu"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_gravity="top|end"
+            android:layout_marginTop="44dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/bg_boton_atras"
+            android:contentDescription="Cerrar"
+            android:padding="8dp"
+            android:src="@drawable/ic_cerrar" />
+
+        <ImageView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_gravity="bottom|start"
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="26dp"
+            android:contentDescription="Logo"
+            android:src="@drawable/logo" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|start"
+            android:layout_marginStart="96dp"
+            android:layout_marginBottom="28dp"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/Texto.Encabezado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Javier Trejo"
+                android:textSize="16sp" />
+
+            <TextView
+                style="@style/Texto.Subencabezado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Edificio B"
+                android:textSize="12sp" />
+
+            <TextView
+                style="@style/Texto.Secundario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ing. en Sistemas"
+                android:textColor="@color/blanco" />
+        </LinearLayout>
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/llFilasMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="8dp" />
+
+    <ImageView
+        android:layout_width="160dp"
+        android:layout_height="107dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="24dp"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_dulce_azul" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <TextView
+        style="@style/Texto.Secundario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="16dp"
+        android:text="Versión 1.0.0 · Hecho con dulzura por los 3 Js"
+        android:textSize="10sp" />
+</LinearLayout>

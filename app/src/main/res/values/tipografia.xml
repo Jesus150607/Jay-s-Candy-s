@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <style name="Texto">
+        <item name="android:fontFamily">@font/rubik</item>
+    </style>
+    <!-- Título grande: "¡Bienvenido!", "¡Tu pedido está listo!" -->
+    <style name="Texto.Titulo">
+        <item name="android:fontFamily">@font/rubik</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/azul_oscuro</item>
+    </style>
+
+    <!-- Título del encabezado azul: "Crear cuenta", "Mi carrito" -->
+    <style name="Texto.Encabezado">
+        <item name="android:fontFamily">@font/rubik</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/blanco</item>
+    </style>
+
+    <!-- Subtítulo lima del encabezado: "20 productos" -->
+    <style name="Texto.Subencabezado">
+        <item name="android:fontFamily">@font/rubik</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/verde_lima</item>
+    </style>
+
+    <!-- Etiqueta de campo: "Nombre completo" -->
+    <style name="Texto.Etiqueta">
+        <item name="android:fontFamily">@font/rubik</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/azul_oscuro</item>
+    </style>
+
+    <!-- Texto normal -->
+    <style name="Texto.Cuerpo">
+        <item name="android:fontFamily">@font/rubik</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/azul_oscuro</item>
+    </style>
+
+    <!-- Texto pequeño gris: "Paquete 6 pzas" -->
+    <style name="Texto.Secundario">
+        <item name="android:fontFamily">@font/rubik</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:textColor">#7A84B8</item>
+    </style>
+
+    <!-- Precio: "$18.00" -->
+    <style name="Texto.Precio">
+        <item name="android:fontFamily">@font/rubik</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/azul_principal</item>
+    </style>
+
+    <!-- Texto de botón -->
+    <style name="Texto.Boton">
+        <item name="android:fontFamily">@font/rubik</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+</resources>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/raiz"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blanco"
+    android:orientation="vertical"
+    tools:context=".CatalogoActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/fondo_claro"
+        android:orientation="vertical">
+
+        <include layout="@layout/include_encabezado" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:overScrollMode="never"
+                android:paddingBottom="90dp">
+
+                <GridLayout
+                    android:id="@+id/gridProductos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:columnCount="2"
+                    android:padding="10dp" />
+            </ScrollView>
+
+            <LinearLayout
+                android:id="@+id/btnVerCarrito"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="18dp"
+                android:layout_marginEnd="18dp"
+                android:layout_marginBottom="14dp"
+                android:background="@drawable/bg_barra_carrito"
+                android:clickable="true"
+                android:elevation="6dp"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="16dp"
+                android:paddingEnd="20dp">
+
+                <TextView
+                    style="@style/Texto.Boton"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:background="@drawable/bg_circulo_flecha"
+                    android:gravity="center"
+                    android:text="2"
+                    android:textColor="@color/azul_oscuro" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/Texto.Boton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Ver mi carrito"
+                        android:textColor="@color/blanco" />
+
+                    <TextView
+                        style="@style/Texto.Secundario"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2 productos"
+                        android:textColor="#B3FFFFFF"
+                        android:textSize="10sp" />
+                </LinearLayout>
+
+                <TextView
+                    style="@style/Texto.Precio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="$36.00"
+                    android:textColor="@color/verde_lima"
+                    android:textSize="18sp" />
+            </LinearLayout>
+        </FrameLayout>
+    </LinearLayout>
+
+    <include layout="@layout/include_barra_inferior" />
+</LinearLayout>

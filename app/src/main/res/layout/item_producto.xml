@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_tarjeta"
+    android:clickable="true"
+    android:elevation="2dp"
+    android:focusable="true"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <FrameLayout
+        android:id="@+id/flFoto"
+        android:layout_width="match_parent"
+        android:layout_height="118dp">
+
+        <TextView
+            android:id="@+id/tvEmoji"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="56sp" />
+
+        <ImageView
+            android:id="@+id/ivCorazon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="top|end"
+            android:layout_margin="6dp"
+            android:background="@drawable/bg_circulo_blanco"
+            android:contentDescription="Favorito"
+            android:padding="7dp"
+            android:src="@drawable/ic_corazon_borde"
+            app:tint="@color/rojo" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tvNombre"
+        style="@style/Texto.Cuerpo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textSize="13sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvPresentacion"
+        style="@style/Texto.Secundario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:id="@+id/tvPrecio"
+            style="@style/Texto.Precio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|start"
+            android:textSize="17sp" />
+
+        <ImageView
+            android:id="@+id/btnMas"
+            android:layout_width="46dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center_vertical|end"
+            android:background="@drawable/bg_boton_mini_lima"
+            android:contentDescription="Agregar"
+            android:padding="6dp"
+            android:src="@drawable/ic_mas"
+            app:tint="@color/azul_oscuro" />
+    </FrameLayout>
+</LinearLayout>

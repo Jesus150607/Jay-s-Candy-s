@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    android:background="@drawable/bg_tarjeta"
+    android:clickable="true"
+    android:elevation="2dp"
+    android:focusable="true"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="12dp">
+
+    <ImageView
+        android:id="@+id/ivIconoDato"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:background="@drawable/bg_icono_azul"
+        android:contentDescription="@null"
+        android:padding="10dp"
+        app:tint="@color/azul_principal" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvEtiquetaDato"
+            style="@style/Texto.Secundario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/tvValorDato"
+            style="@style/Texto.Cuerpo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:contentDescription="Editar"
+        android:src="@drawable/ic_lapiz"
+        app:tint="@color/texto_hint" />
+</LinearLayout>

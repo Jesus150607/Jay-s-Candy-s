@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/raiz"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blanco"
+    tools:context=".DetalleActivity">
+
+    <FrameLayout
+        android:id="@+id/flImagen"
+        android:layout_width="match_parent"
+        android:layout_height="330dp"
+        android:background="@drawable/bg_cat_galletas">
+
+        <TextView
+            android:id="@+id/tvEmoji"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="40dp"
+            android:textSize="150sp" />
+
+        <ImageView
+            android:id="@+id/btnAtras"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="top|start"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="44dp"
+            android:background="@drawable/bg_boton_atras"
+            android:contentDescription="Regresar"
+            android:padding="8dp"
+            android:src="@drawable/ic_flecha_atras" />
+
+        <ImageView
+            android:id="@+id/ivCorazon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="top|end"
+            android:layout_marginTop="44dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/bg_circulo_blanco"
+            android:contentDescription="Favorito"
+            android:padding="10dp"
+            android:src="@drawable/ic_corazon_borde"
+            app:tint="@color/rojo" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="290dp"
+        android:background="@drawable/bg_panel_detalle"
+        android:elevation="8dp"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:overScrollMode="never">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="24dp">
+
+                <TextView
+                    android:id="@+id/tvCategoria"
+                    style="@style/Texto.Etiqueta"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/azul_principal"
+                    android:textSize="11sp" />
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp">
+
+                    <TextView
+                        android:id="@+id/tvNombre"
+                        style="@style/Texto.Titulo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|start"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/tvPrecio"
+                        style="@style/Texto.Precio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|end"
+                        android:textSize="22sp" />
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/tvPresentacion"
+                    style="@style/Texto.Secundario"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:textSize="12sp" />
+
+                <TextView
+                    style="@style/Texto.Etiqueta"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="22dp"
+                    android:text="Descripción"
+                    android:textSize="14sp" />
+
+                <TextView
+                    style="@style/Texto.Secundario"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="Crujiente y delicioso, ideal para el recreo. Producto de ejemplo; aquí irá la descripción real que publique el vendedor."
+                    android:textSize="12sp" />
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp">
+
+                    <TextView
+                        style="@style/Texto.Etiqueta"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|start"
+                        android:text="Cantidad"
+                        android:textSize="14sp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/btnMenos"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:background="@drawable/bg_circulo_icono"
+                            android:contentDescription="Menos"
+                            android:padding="9dp"
+                            android:src="@drawable/ic_menos"
+                            app:tint="@color/azul_principal" />
+
+                        <TextView
+                            android:id="@+id/tvCantidad"
+                            style="@style/Texto.Titulo"
+                            android:layout_width="44dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:textSize="16sp" />
+
+                        <ImageView
+                            android:id="@+id/btnMasCant"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:background="@drawable/bg_circulo_flecha"
+                            android:contentDescription="Más"
+                            android:padding="9dp"
+                            android:src="@drawable/ic_mas"
+                            app:tint="@color/azul_oscuro" />
+                    </LinearLayout>
+                </FrameLayout>
+            </LinearLayout>
+        </ScrollView>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnAgregar"
+            style="@style/BotonAzul"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_margin="24dp" />
+    </LinearLayout>
+</FrameLayout>

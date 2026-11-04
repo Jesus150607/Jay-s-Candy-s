@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="carreras">
+        <item>Selecciona tu carrera</item>
+        <item>Licenciatura en Ingeniería en Manufactura Avanzada</item>
+        <item>Licenciatura en Ingeniería Financiera</item>
+        <item>Licenciatura en Ingeniería en Tecnologías de la Información e Innovación Digital</item>
+        <item>Licenciatura en Ingeniería Mecánica Automotriz</item>
+        <item>Licenciatura en Comercio Internacional y Aduanas</item>
+        <item>Profesor</item>
+    </string-array>
+
+    <string-array name="edificios">
+        <item>Selecciona tu edificio</item>
+        <item>Edificio 1</item>
+        <item>Edificio 2</item>
+        <item>Edificio 3</item>
+        <item>Queso</item>
+        <item>Biblioteca</item>
+        <item>Otro</item>
+    </string-array>
+
+    <string-array name="categorias">
+        <item>Selecciona una categoría</item>
+        <item>Galletas</item>
+        <item>Golosinas</item>
+        <item>Frituras</item>
+        <item>Chocolates</item>
+    </string-array>
+
+
+
+</resources>

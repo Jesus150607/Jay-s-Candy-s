@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="blanco">#FFFFFFFF</color>
+    <color name="azul_principal">#1E3FCB</color>
+    <color name="azul_oscuro">#0A1A6B</color>
+    <color name="verde_lima">#B8F23A</color>
+    <color name="verde_lima_oscuro">#7BC51A</color>
+    <color name="verde_whatsapp">#25D366</color>
+    <color name="naranja">#FFA726</color>
+    <color name="rojo">#E53950</color>
+    <color name="fondo_claro">#F0F3FF</color>
+    <color name="texto_secundario">#7A84B8</color>
+    <color name="texto_hint">#9AA3D6</color>
+    <color name="borde_campo">#DDE3FA</color>
+    <color name="fondo_icono">#E8EDFF</color>
+    <color name="fondo_carga_inicio">#2447D6</color>
+    <color name="fondo_carga_fin">#040A33</color>
+    <color name="amarillo_oscuro">#B7791F</color>
+    <color name="verde_texto">#4C9A0A</color>
+    <color name="verde_claro_burbuja">#DCF8C6</color>
+    <color name="rojo_claro">#FFE3E8</color>
+    <color name="amarillo_claro">#FFF0C2</color>
+    <color name="verde_claro">#E3F6C8</color>
+    <color name="gris_boton">#E4E8F7</color>
+
+
+</resources>

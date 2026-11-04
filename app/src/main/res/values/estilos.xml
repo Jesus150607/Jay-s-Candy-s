@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Contenedor del campo: icono + texto -->
+    <style name="CampoContenedor">
+        <item name="android:background">@drawable/bg_campo</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingStart">10dp</item>
+        <item name="android:paddingEnd">14dp</item>
+    </style>
+
+    <!-- Icono circular del campo -->
+    <style name="CampoIcono">
+        <item name="android:background">@drawable/bg_circulo_icono</item>
+        <item name="android:padding">7dp</item>
+        <item name="android:tint">@color/azul_principal</item>
+    </style>
+
+    <!-- Texto que escribe el usuario -->
+    <style name="CampoEntrada">
+        <item name="android:background">@null</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/azul_oscuro</item>
+        <item name="android:textColorHint">@color/texto_hint</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:paddingStart">12dp</item>
+    </style>
+
+    <!-- Botón lima -->
+    <style name="BotonLima">
+        <item name="android:background">@drawable/bg_boton_lima</item>
+        <item name="android:textColor">@color/azul_oscuro</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+    <style name="BotonAzul">
+        <item name="android:background">@drawable/bg_boton_azul</item>
+        <item name="android:textColor">@color/verde_lima</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+    <style name="BotonBorde">
+        <item name="android:background">@drawable/bg_boton_borde</item>
+        <item name="android:textColor">@color/azul_principal</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+    <style name="BotonBordeRojo">
+        <item name="android:background">@drawable/bg_boton_borde_rojo</item>
+        <item name="android:textColor">@color/rojo</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+    <style name="BotonWhatsApp">
+        <item name="android:background">@drawable/bg_boton_whatsapp</item>
+        <item name="android:textColor">@color/blanco</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+    <style name="BotonGris">
+        <item name="android:background">@drawable/bg_boton_gris</item>
+        <item name="android:textColor">@color/texto_secundario</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+    <style name="BotonRojo">
+        <item name="android:background">@drawable/bg_boton_rojo</item>
+        <item name="android:textColor">@color/blanco</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+    <style name="AnimMenu">
+        <item name="android:windowEnterAnimation">@android:anim/slide_in_left</item>
+        <item name="android:windowExitAnimation">@android:anim/slide_out_right</item>
+    </style>
+</resources>
