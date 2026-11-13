@@ -28,32 +28,46 @@
             android:paddingBottom="32dp">
 
             <!-- Foto -->
-            <LinearLayout
+            <FrameLayout
                 android:id="@+id/btnFoto"
                 android:layout_width="match_parent"
                 android:layout_height="110dp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/bg_foto_punteada"
                 android:clickable="true"
-                android:focusable="true"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:focusable="true">
+
+                <LinearLayout
+                    android:id="@+id/llPromptFoto"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/bg_circulo_azul"
+                        android:contentDescription="@null"
+                        android:padding="10dp"
+                        android:src="@drawable/ic_mas" />
+
+                    <TextView
+                        style="@style/Texto.Etiqueta"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Agregar foto del producto" />
+                </LinearLayout>
 
                 <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="@drawable/bg_circulo_azul"
-                    android:contentDescription="@null"
-                    android:padding="10dp"
-                    android:src="@drawable/ic_mas" />
-
-                <TextView
-                    style="@style/Texto.Etiqueta"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Agregar foto del producto" />
-            </LinearLayout>
+                    android:id="@+id/ivPreviewFoto"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="Vista previa de la foto"
+                    android:scaleType="centerCrop"
+                    android:visibility="gone" />
+            </FrameLayout>
 
             <!-- Nombre -->
             <TextView
@@ -183,6 +197,73 @@
                     android:hint="Ej. Paquete 6 pzas"
                     android:importantForAutofill="no"
                     android:inputType="textCapSentences" />
+            </LinearLayout>
+
+            <!-- Stock / Disponibles -->
+            <TextView
+                style="@style/Texto.Etiqueta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:text="Stock disponible (Piezas)" />
+
+            <LinearLayout
+                style="@style/CampoContenedor"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="6dp">
+
+                <ImageView
+                    style="@style/CampoIcono"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_etiqueta" />
+
+                <EditText
+                    android:id="@+id/etStock"
+                    style="@style/CampoEntrada"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:hint="Ej. 10"
+                    android:importantForAutofill="no"
+                    android:inputType="number" />
+            </LinearLayout>
+
+            <!-- Descripción -->
+            <TextView
+                style="@style/Texto.Etiqueta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:text="Descripción del dulce" />
+
+            <LinearLayout
+                style="@style/CampoContenedor"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginTop="6dp"
+                android:paddingTop="8dp">
+
+                <ImageView
+                    style="@style/CampoIcono"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_info" />
+
+                <EditText
+                    android:id="@+id/etDescripcion"
+                    style="@style/CampoEntrada"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="top|start"
+                    android:hint="Ej. Deliciosas galletas crujientes con chispas de chocolate real."
+                    android:importantForAutofill="no"
+                    android:inputType="textMultiLine|textCapSentences"
+                    android:maxLines="3" />
             </LinearLayout>
 
             <androidx.appcompat.widget.AppCompatButton

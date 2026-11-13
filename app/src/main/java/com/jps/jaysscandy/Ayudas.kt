@@ -18,59 +18,49 @@ import android.widget.Toast
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.util.Locale
 
-// ---------- Datos de ejemplo ----------
+import java.util.UUID
+
+// ---------- Datos ----------
 data class Producto(
+    val id: String = UUID.randomUUID().toString(),
     val nombre: String,
     val presentacion: String,
     val precio: Double,
     val emoji: String,
     val fondo: Int,
     val categoria: String,
-    var favorito: Boolean = false
+    var favorito: Boolean = false,
+    val fotoUri: String? = null,
+    var stock: Int = 10,
+    val descripcion: String = ""
+)
+
+fun Producto.toEntity() = ProductoEntity(
+    id = id,
+    nombre = nombre,
+    presentacion = presentacion,
+    precio = precio,
+    emoji = emoji,
+    fondo = fondo,
+    categoria = categoria,
+    fotoUri = fotoUri,
+    favorito = favorito,
+    stock = stock,
+    descripcion = descripcion
 )
 
 data class ItemCarrito(val producto: Producto, var cantidad: Int)
 
 object Datos {
-    val chispas = Producto("Galletas con chispas", "Paquete 6 pzas", 18.0, "🍪", R.drawable.bg_cat_galletas, "Galletas", true)
-    val avena = Producto("Galletas de avena", "Paquete 8 pzas", 20.0, "🍪", R.drawable.bg_cat_frituras, "Galletas")
-    val vainilla = Producto("Sándwich de vainilla", "Tubo 12 pzas", 15.0, "🍪", R.drawable.bg_cat_golosinas, "Galletas")
-    val maria = Producto("Galletas María", "Paquete 10 pzas", 12.0, "🍪", R.drawable.bg_cat_menta, "Galletas")
-    val barra = Producto("Barra de chocolate", "Chocolate con leche", 25.0, "🍫", R.drawable.bg_cat_chocolates, "Chocolates", true)
-    val papas = Producto("Papas sabor queso", "Bolsa mediana", 22.0, "🍟", R.drawable.bg_cat_frituras, "Frituras", true)
-    val gomitas = Producto("Gomitas de osito", "Bolsa 100 g", 14.0, "🧸", R.drawable.bg_cat_golosinas, "Golosinas", true)
-
-    val catalogo: Map<String, List<Producto>> = mapOf(
-        "Galletas" to listOf(chispas, avena, vainilla, maria),
-        "Golosinas" to listOf(
-            gomitas,
-            Producto("Paleta gigante", "Pieza", 10.0, "🍭", R.drawable.bg_cat_golosinas, "Golosinas"),
-            Producto("Gomitas ácidas", "Bolsa 80 g", 12.0, "🍬", R.drawable.bg_cat_menta, "Golosinas"),
-            Producto("Malvaviscos", "Bolsa 120 g", 16.0, "🍡", R.drawable.bg_cat_frituras, "Golosinas")
-        ),
-        "Frituras" to listOf(
-            papas,
-            Producto("Nachos con queso", "Bolsa 90 g", 18.0, "🌮", R.drawable.bg_cat_galletas, "Frituras"),
-            Producto("Palomitas", "Bolsa chica", 15.0, "🍿", R.drawable.bg_cat_frituras, "Frituras"),
-            Producto("Churritos", "Bolsa 70 g", 12.0, "🥨", R.drawable.bg_cat_menta, "Frituras")
-        ),
-        "Chocolates" to listOf(
-            barra,
-            Producto("Bombones", "Caja 8 pzas", 30.0, "🍫", R.drawable.bg_cat_chocolates, "Chocolates"),
-            Producto("Chocolate blanco", "Barra 40 g", 18.0, "🍫", R.drawable.bg_cat_golosinas, "Chocolates"),
-            Producto("Trufas", "Caja 6 pzas", 35.0, "🍬", R.drawable.bg_cat_galletas, "Chocolates")
-        )
-    )
-
-    val favoritos = listOf(barra, papas, chispas, gomitas)
-
-    val itemsCarrito = mutableListOf(
-        ItemCarrito(chispas, 2),
-        ItemCarrito(barra, 1),
-        ItemCarrito(papas, 1)
-    )
+    val catalogo: Map<String, List<Producto>> = emptyMap()
+    val favoritos = emptyList<Producto>()
+    val itemsCarrito = mutableListOf<ItemCarrito>()
 }
 
 fun Double.pesos(): String = "\$" + String.format(Locale.US, "%.2f", this)
@@ -97,8 +87,27 @@ fun Activity.llenarProductos(grid: GridLayout, lista: List<Producto>, alAbrir: (
     val m = (6 * resources.displayMetrics.density).toInt()
     lista.forEach { p ->
         val v = layoutInflater.inflate(R.layout.item_producto, grid, false)
-        v.findViewById<View>(R.id.flFoto).setBackgroundResource(p.fondo)
-        v.findViewById<TextView>(R.id.tvEmoji).text = p.emoji
+        val flFoto = v.findViewById<View>(R.id.flFoto)
+        val tvEmoji = v.findViewById<TextView>(R.id.tvEmoji)
+        val ivFoto = v.findViewById<ImageView>(R.id.ivFotoProducto)
+
+        flFoto.setBackgroundResource(p.fondo)
+        if (!p.fotoUri.isNullOrEmpty()) {
+            try {
+                ivFoto.setImageURI(android.net.Uri.parse(p.fotoUri))
+                ivFoto.visibility = View.VISIBLE
+                tvEmoji.visibility = View.GONE
+            } catch (e: Exception) {
+                ivFoto.visibility = View.GONE
+                tvEmoji.visibility = View.VISIBLE
+                tvEmoji.text = p.emoji
+            }
+        } else {
+            ivFoto.visibility = View.GONE
+            tvEmoji.visibility = View.VISIBLE
+            tvEmoji.text = p.emoji
+        }
+
         v.findViewById<TextView>(R.id.tvNombre).text = p.nombre
         v.findViewById<TextView>(R.id.tvPresentacion).text = p.presentacion
         v.findViewById<TextView>(R.id.tvPrecio).text = p.precio.pesos()
@@ -108,10 +117,37 @@ fun Activity.llenarProductos(grid: GridLayout, lista: List<Producto>, alAbrir: (
             corazon.setImageResource(if (p.favorito) R.drawable.ic_corazon else R.drawable.ic_corazon_borde)
         }
         pintar()
-        corazon.setOnClickListener { p.favorito = !p.favorito; pintar() }
+        corazon.setOnClickListener {
+            p.favorito = !p.favorito
+            pintar()
+            (this as? androidx.lifecycle.LifecycleOwner)?.lifecycleScope?.launch {
+                try {
+                    Graph.iniciar(this@llenarProductos)
+                    Graph.productos.guardar(p.toEntity())
+                } catch (e: Exception) {
+                    // ignore
+                }
+            }
+        }
 
         v.findViewById<View>(R.id.btnMas).setOnClickListener {
-            Toast.makeText(this, "${p.nombre} agregado", Toast.LENGTH_SHORT).show()
+            if (p.stock <= 0) {
+                Toast.makeText(this, "Producto agotado", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            val existente = Datos.itemsCarrito.find { it.producto.nombre == p.nombre }
+            val cantActual = existente?.cantidad ?: 0
+            if (cantActual + 1 > p.stock) {
+                Toast.makeText(this, "Llegaste al límite del stock disponible (${p.stock})", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            if (existente != null) {
+                existente.cantidad++
+            } else {
+                Datos.itemsCarrito.add(ItemCarrito(p, 1))
+            }
+            Toast.makeText(this, "${p.nombre} agregado al carrito", Toast.LENGTH_SHORT).show()
+            (this as? CatalogoActivity)?.actualizarBarraCarrito()
         }
         v.setOnClickListener { alAbrir(p) }
 
@@ -134,6 +170,9 @@ fun Activity.abrirDetalle(p: Producto) {
         putExtra("fondo", p.fondo)
         putExtra("categoria", p.categoria)
         putExtra("favorito", p.favorito)
+        putExtra("fotoUri", p.fotoUri)
+        putExtra("stock", p.stock)
+        putExtra("descripcion", p.descripcion)
     })
 }
 
@@ -185,13 +224,26 @@ fun Activity.mostrarMenuLateral() {
     }
     d.findViewById<View>(R.id.btnCerrarMenu).setOnClickListener { d.dismiss() }
 
+    val tvNombre = d.findViewById<TextView>(R.id.tvNombreMenu)
+    val tvEdificio = d.findViewById<TextView>(R.id.tvEdificioMenu)
+    val tvCarrera = d.findViewById<TextView>(R.id.tvCarreraMenu)
+
+    val id = Graph.sesion.usuarioId()
+    if (id != null) {
+        CoroutineScope(Dispatchers.Main).launch {
+            val usuario = Graph.usuarios.obtenerPorId(id)
+            if (usuario != null) {
+                tvNombre?.text = usuario.nombre
+                tvEdificio?.text = usuario.edificio.ifBlank { "N/A" }
+                tvCarrera?.text = usuario.carrera.ifBlank { "N/A" }
+            }
+        }
+    }
+
     val contenedor = d.findViewById<LinearLayout>(R.id.llFilasMenu)
     val filas = listOf(
         FilaMenu("Favoritos", "Tus productos guardados", R.drawable.ic_corazon, R.drawable.bg_icono_rojo, R.color.rojo),
-        FilaMenu("Idioma", "Español", R.drawable.ic_idioma, R.drawable.bg_icono_azul, R.color.azul_principal),
-        FilaMenu("Información", "Acerca de la app y privacidad", R.drawable.ic_info, R.drawable.bg_icono_amarillo, R.color.amarillo_oscuro),
-        FilaMenu("Contáctanos", "Conoce al equipo", R.drawable.ic_telefono, R.drawable.bg_icono_verde, R.color.verde_texto),
-        FilaMenu("Buzón", "Sugerencias y comentarios", R.drawable.ic_buzon, R.drawable.bg_icono_azul, R.color.texto_secundario)
+        FilaMenu("Donaciones", "Apoya el desarrollo del proyecto", R.drawable.ic_info, R.drawable.bg_icono_amarillo, R.color.amarillo_oscuro)
     )
     filas.forEach { f ->
         val v = layoutInflater.inflate(R.layout.item_menu_fila, contenedor, false)
@@ -203,13 +255,31 @@ fun Activity.mostrarMenuLateral() {
         ic.setColorFilter(getColor(f.color))
         v.setOnClickListener {
             d.dismiss()
-            if (f.titulo == "Favoritos") {
-                startActivity(Intent(this, FavoritosActivity::class.java))
-            } else {
-                Toast.makeText(this, "${f.titulo}: próximamente", Toast.LENGTH_SHORT).show()
+            when (f.titulo) {
+                "Favoritos" -> startActivity(Intent(this, FavoritosActivity::class.java))
+                "Donaciones" -> mostrarDialogoDonaciones()
+                else -> Toast.makeText(this, "${f.titulo}: en desarrollo", Toast.LENGTH_SHORT).show()
             }
         }
         contenedor.addView(v)
     }
+    d.show()
+}
+
+fun Activity.mostrarDialogoDonaciones() {
+    val d = Dialog(this)
+    d.requestWindowFeature(Window.FEATURE_NO_TITLE)
+    d.setContentView(R.layout.dialog_eliminar)
+    d.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+    d.window?.setLayout((resources.displayMetrics.widthPixels * 0.85).toInt(), ViewGroup.LayoutParams.WRAP_CONTENT)
+
+    val tvMensaje = d.findViewById<TextView>(R.id.tvMensajeEliminar)
+    val btnCancelar = d.findViewById<View>(R.id.btnCancelarEliminar)
+    val btnConfirmar = d.findViewById<TextView>(R.id.btnConfirmarEliminar)
+
+    tvMensaje?.text = "🎁 Donaciones para el Proyecto\n\nTu apoyo nos ayuda a seguir manteniendo la aplicación activa para la comunidad universitaria.\n\n• Fundación: Dulzura Escolar A.C.\n• Banco: Banamex\n• CLABE: 0021 8001 5576 2143 66"
+    btnCancelar?.visibility = View.GONE
+    btnConfirmar?.text = "Entendido"
+    btnConfirmar?.setOnClickListener { d.dismiss() }
     d.show()
 }

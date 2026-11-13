@@ -50,8 +50,18 @@
                         android:layout_gravity="center"
                         android:background="@drawable/bg_avatar_grande"
                         android:gravity="center"
-                        android:text="JT"
+                        android:text="U"
                         android:textSize="30sp" />
+
+                    <ImageView
+                        android:id="@+id/ivAvatarFoto"
+                        android:layout_width="96dp"
+                        android:layout_height="96dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/bg_avatar_grande"
+                        android:contentDescription="Foto de perfil"
+                        android:scaleType="centerCrop"
+                        android:visibility="gone" />
 
                     <ImageView
                         android:layout_width="28dp"
@@ -65,6 +75,7 @@
                 </FrameLayout>
 
                 <TextView
+                    android:id="@+id/tvNombrePerfil"
                     style="@style/Texto.Encabezado"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -73,6 +84,7 @@
                     android:text="Javier Trejo Enríquez" />
 
                 <TextView
+                    android:id="@+id/tvSubtituloPerfil"
                     style="@style/Texto.Subencabezado"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -114,17 +126,21 @@
                 android:paddingBottom="14dp">
 
                 <LinearLayout
+                    android:id="@+id/llBoxPedidos"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:gravity="center"
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/tvNumPedidos"
                         style="@style/Texto.Precio"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="4"
+                        android:text="0"
                         android:textSize="22sp" />
 
                     <TextView
@@ -140,17 +156,21 @@
                     android:background="@color/borde_campo" />
 
                 <LinearLayout
+                    android:id="@+id/llBoxFavoritos"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:gravity="center"
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/tvNumFavoritos"
                         style="@style/Texto.Precio"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="12"
+                        android:text="0"
                         android:textSize="22sp" />
 
                     <TextView

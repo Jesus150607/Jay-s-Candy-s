@@ -55,12 +55,13 @@
                 android:paddingEnd="20dp">
 
                 <TextView
+                    android:id="@+id/tvCantCarrito"
                     style="@style/Texto.Boton"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:background="@drawable/bg_circulo_flecha"
                     android:gravity="center"
-                    android:text="2"
+                    android:text="0"
                     android:textColor="@color/azul_oscuro" />
 
                 <LinearLayout
@@ -78,19 +79,21 @@
                         android:textColor="@color/blanco" />
 
                     <TextView
+                        android:id="@+id/tvDescCarrito"
                         style="@style/Texto.Secundario"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="2 productos"
+                        android:text="0 productos"
                         android:textColor="#B3FFFFFF"
                         android:textSize="10sp" />
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/tvPrecioCarrito"
                     style="@style/Texto.Precio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="$36.00"
+                    android:text="$0.00"
                     android:textColor="@color/verde_lima"
                     android:textSize="18sp" />
             </LinearLayout>

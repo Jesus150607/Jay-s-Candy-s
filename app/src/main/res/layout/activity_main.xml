@@ -65,37 +65,6 @@
                         android:textSize="18sp" />
                 </LinearLayout>
 
-                <!-- Campana con badge -->
-                <FrameLayout
-                    android:layout_width="52dp"
-                    android:layout_height="52dp"
-                    android:layout_gravity="top|end"
-                    android:layout_marginTop="40dp"
-                    android:layout_marginEnd="16dp">
-
-                    <ImageView
-                        android:id="@+id/btnNotificaciones"
-                        android:layout_width="44dp"
-                        android:layout_height="44dp"
-                        android:layout_gravity="bottom|start"
-                        android:background="@drawable/bg_boton_atras"
-                        android:contentDescription="Notificaciones"
-                        android:padding="10dp"
-                        android:src="@drawable/ic_campana" />
-
-                    <TextView
-                        android:id="@+id/tvBadge"
-                        android:layout_width="18dp"
-                        android:layout_height="18dp"
-                        android:layout_gravity="top|end"
-                        android:background="@drawable/bg_badge"
-                        android:gravity="center"
-                        android:text="3"
-                        android:textColor="@color/blanco"
-                        android:textSize="9sp"
-                        android:textStyle="bold" />
-                </FrameLayout>
-
                 <!-- Saludo -->
                 <TextView
                     android:id="@+id/tvSaludo"
@@ -105,7 +74,7 @@
                     android:layout_gravity="bottom|start"
                     android:layout_marginStart="24dp"
                     android:layout_marginBottom="66dp"
-                    android:text="Hola, Javier" />
+                    android:text="Hola" />
 
                 <TextView
                     style="@style/Texto.Encabezado"
@@ -164,6 +133,59 @@
                     android:src="@drawable/ic_buscar"
                     app:tint="@color/azul_oscuro" />
             </LinearLayout>
+
+            <!-- Carrusel de Anuncios Promocionales -->
+            <FrameLayout
+                android:id="@+id/cardCarruselAnuncios"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/bg_tarjeta"
+                android:elevation="4dp"
+                android:padding="12dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvIconoAnuncio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="12dp"
+                        android:text="📢"
+                        android:textSize="30sp" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvTituloAnuncio"
+                            style="@style/Texto.Boton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Anuncio de Patrocinador"
+                            android:textColor="@color/azul_principal"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/tvDescAnuncio"
+                            style="@style/Texto.Secundario"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="¡Aprovecha ofertas exclusivas en la cafetería escolar!"
+                            android:textSize="10sp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </FrameLayout>
 
             <!-- Banner combo -->
             <FrameLayout

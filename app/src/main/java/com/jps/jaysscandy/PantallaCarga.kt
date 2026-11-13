@@ -9,12 +9,15 @@ import android.widget.SeekBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.animation.doOnEnd
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
 
 class PantallaCarga : AppCompatActivity() {
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Graph.iniciar(this)
         setContentView(R.layout.activity_pantalla_carga)
 
         val pbCarga = findViewById<SeekBar>(R.id.pbCarga)
@@ -24,7 +27,7 @@ class PantallaCarga : AppCompatActivity() {
         pbCarga.setOnTouchListener { _, _ -> true }
 
         ValueAnimator.ofInt(0, 100).apply {
-            duration = 2500
+            duration = 2000
             interpolator = LinearInterpolator()
             addUpdateListener {
                 val valor = it.animatedValue as Int
@@ -37,7 +40,24 @@ class PantallaCarga : AppCompatActivity() {
     }
 
     private fun irSiguientePantalla() {
-        startActivity(Intent(this, InicioSesion::class.java))
-        finish()
+        if (isFinishing || isDestroyed) return
+        lifecycleScope.launch {
+            try {
+                Graph.iniciar(this@PantallaCarga)
+                val id = Graph.sesion.usuarioId()
+                val usuario = id?.let { Graph.usuarios.obtenerPorId(it) }
+                val destino = when {
+                    usuario?.rol == Rol.DUENO -> PanelVendedorActivity::class.java
+                    usuario != null -> MainActivity::class.java
+                    else -> InicioSesion::class.java
+                }
+                startActivity(Intent(this@PantallaCarga, destino))
+                finish()
+            } catch (e: Exception) {
+                e.printStackTrace()
+                startActivity(Intent(this@PantallaCarga, InicioSesion::class.java))
+                finish()
+            }
+        }
     }
 }

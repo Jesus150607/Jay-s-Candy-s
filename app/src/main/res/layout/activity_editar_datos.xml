@@ -27,6 +27,46 @@
             android:paddingEnd="24dp"
             android:paddingBottom="32dp">
 
+            <!-- Foto de perfil -->
+            <FrameLayout
+                android:id="@+id/btnCambiarFoto"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/bg_avatar_grande"
+                android:clickable="true"
+                android:focusable="true">
+
+                <TextView
+                    android:id="@+id/tvAvatarLetra"
+                    style="@style/Texto.Titulo"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="U"
+                    android:textSize="28sp" />
+
+                <ImageView
+                    android:id="@+id/ivFotoPerfil"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="Foto de perfil"
+                    android:scaleType="centerCrop"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="bottom|end"
+                    android:background="@drawable/bg_circulo_flecha"
+                    android:contentDescription="Cambiar foto"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_lapiz"
+                    app:tint="@color/azul_oscuro" />
+            </FrameLayout>
+
             <TextView
                 style="@style/Texto.Etiqueta"
                 android:layout_width="wrap_content"
@@ -53,11 +93,12 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:hint="Nombre completo"
                     android:importantForAutofill="no"
-                    android:inputType="textPersonName|textCapWords"
-                    android:text="Javier Trejo Enríquez" />
+                    android:inputType="textPersonName|textCapWords" />
             </LinearLayout>
 
+            <!-- Teléfono -->
             <TextView
                 style="@style/Texto.Etiqueta"
                 android:layout_width="wrap_content"
@@ -84,10 +125,50 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:hint="Número de 10 dígitos"
                     android:importantForAutofill="no"
                     android:inputType="phone"
-                    android:maxLength="10"
-                    android:text="5512345678" />
+                    android:maxLength="10" />
+            </LinearLayout>
+
+            <!-- Edificio -->
+            <TextView
+                style="@style/Texto.Etiqueta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:text="Edificio" />
+
+            <LinearLayout
+                android:id="@+id/llEdificio"
+                style="@style/CampoContenedor"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="6dp">
+
+                <ImageView
+                    style="@style/CampoIcono"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_edificio" />
+
+                <Spinner
+                    android:id="@+id/spEdificio"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:padding="0dp"
+                    android:popupBackground="@drawable/bg_campo"
+                    android:spinnerMode="dropdown" />
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_flecha_abajo"
+                    app:tint="@color/texto_secundario" />
             </LinearLayout>
 
             <TextView

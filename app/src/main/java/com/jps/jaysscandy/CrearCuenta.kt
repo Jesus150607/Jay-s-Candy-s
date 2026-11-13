@@ -1,5 +1,6 @@
 package com.jps.jaysscandy
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
 
 class CrearCuenta : AppCompatActivity() {
 
@@ -52,24 +55,71 @@ class CrearCuenta : AppCompatActivity() {
         btnRegistrarme.setOnClickListener {
             val nombre = etNombre.text.toString().trim()
             val telefono = etTelefono.text.toString().trim()
+            val carrera = if (spCarrera.selectedItemPosition == 0) "" else spCarrera.selectedItem.toString()
+            val edificio = if (spEdificio.selectedItemPosition == 0) "" else spEdificio.selectedItem.toString()
             val password = etPassword.text.toString()
             val confirmar = etConfirmar.text.toString()
 
-            when {
-                nombre.isEmpty() -> etNombre.error = "Escribe tu nombre"
-                telefono.length != 10 -> etTelefono.error = "Escribe tu número de 10 dígitos"
-                spCarrera.selectedItemPosition == 0 ->
-                    Toast.makeText(this, "Selecciona tu carrera", Toast.LENGTH_SHORT).show()
-                spEdificio.selectedItemPosition == 0 ->
-                    Toast.makeText(this, "Selecciona tu edificio", Toast.LENGTH_SHORT).show()
-                password.length < 6 -> etPassword.error = "Mínimo 6 caracteres"
-                password != confirmar -> etConfirmar.error = "Las contraseñas no coinciden"
-                else -> {
-                    val carrera = spCarrera.selectedItem.toString()
-                    val edificio = spEdificio.selectedItem.toString()
-                    // Aquí después guardamos en Firebase:
-                    // nombre, telefono, carrera, edificio y password
-                    Toast.makeText(this, "Datos válidos: $carrera · $edificio", Toast.LENGTH_SHORT).show()
+            val datos = DatosRegistro(
+                nombre = nombre,
+                telefono = telefono,
+                carrera = carrera,
+                edificio = edificio,
+                password = password,
+                confirmar = confirmar
+            )
+
+            val errores = Validador.validarRegistro(datos)
+            if (errores.isNotEmpty()) {
+                errores[Campo.NOMBRE]?.let { etNombre.error = it }
+                errores[Campo.TELEFONO]?.let { etTelefono.error = it }
+                errores[Campo.CARRERA]?.let { Toast.makeText(this, it, Toast.LENGTH_SHORT).show() }
+                errores[Campo.EDIFICIO]?.let { Toast.makeText(this, it, Toast.LENGTH_SHORT).show() }
+                errores[Campo.PASSWORD]?.let { etPassword.error = it }
+                errores[Campo.CONFIRMAR]?.let { etConfirmar.error = it }
+                return@setOnClickListener
+            }
+
+            btnRegistrarme.isEnabled = false
+
+            lifecycleScope.launch {
+                try {
+                    Graph.iniciar(this@CrearCuenta)
+                    when (val resultado = Graph.usuarios.registrar(datos)) {
+                        is ResultadoRegistro.Errores -> {
+                            btnRegistrarme.isEnabled = true
+                            resultado.porCampo[Campo.NOMBRE]?.let { etNombre.error = it }
+                            resultado.porCampo[Campo.TELEFONO]?.let { etTelefono.error = it }
+                            resultado.porCampo[Campo.CARRERA]?.let { Toast.makeText(this@CrearCuenta, it, Toast.LENGTH_SHORT).show() }
+                            resultado.porCampo[Campo.EDIFICIO]?.let { Toast.makeText(this@CrearCuenta, it, Toast.LENGTH_SHORT).show() }
+                            resultado.porCampo[Campo.PASSWORD]?.let { etPassword.error = it }
+                            resultado.porCampo[Campo.CONFIRMAR]?.let { etConfirmar.error = it }
+                        }
+                        is ResultadoRegistro.Exito -> {
+                            // Borrar el formulario
+                            etNombre.text.clear()
+                            etTelefono.text.clear()
+                            spCarrera.setSelection(0)
+                            spEdificio.setSelection(0)
+                            etPassword.text.clear()
+                            etConfirmar.text.clear()
+
+                            Toast.makeText(
+                                this@CrearCuenta,
+                                "¡Cuenta creada exitosamente! Por favor inicia sesión.",
+                                Toast.LENGTH_LONG
+                            ).show()
+
+                            // Mandar a iniciar sesión
+                            val intent = Intent(this@CrearCuenta, InicioSesion::class.java)
+                            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                            startActivity(intent)
+                            finish()
+                        }
+                    }
+                } catch (e: Exception) {
+                    btnRegistrarme.isEnabled = true
+                    Toast.makeText(this@CrearCuenta, "Error al crear cuenta: ${e.localizedMessage}", Toast.LENGTH_LONG).show()
                 }
             }
         }
