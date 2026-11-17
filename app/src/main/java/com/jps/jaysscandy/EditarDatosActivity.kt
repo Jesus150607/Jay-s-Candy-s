@@ -52,6 +52,16 @@ class EditarDatosActivity : AppCompatActivity() {
         val spEdificio = findViewById<Spinner>(R.id.spEdificio)
         val llEdificio = findViewById<LinearLayout>(R.id.llEdificio)
         val etPassword = findViewById<EditText>(R.id.etPassword)
+        val tvAvatarLetra = findViewById<TextView>(R.id.tvAvatarLetra)
+
+        fun actualizarIniciales(nombreStr: String) {
+            val iniciales = nombreStr.split(" ")
+                .filter { it.isNotEmpty() }
+                .take(2)
+                .map { it[0].uppercaseChar() }
+                .joinToString("")
+            tvAvatarLetra?.text = if (iniciales.isNotEmpty()) iniciales else "U"
+        }
 
         val edificios = resources.getStringArray(R.array.edificios)
         spEdificio.adapter = crearAdaptadorSpinner(edificios)
@@ -73,17 +83,22 @@ class EditarDatosActivity : AppCompatActivity() {
                 val pos = edificios.indexOf(u.edificio)
                 if (pos >= 0) spEdificio.setSelection(pos)
 
+                actualizarIniciales(u.nombre)
+
                 selectedFotoUri = u.fotoUri
+                val ivFotoPerfil = findViewById<ImageView>(R.id.ivFotoPerfil)
                 if (!selectedFotoUri.isNullOrEmpty()) {
                     try {
-                        val ivFotoPerfil = findViewById<ImageView>(R.id.ivFotoPerfil)
-                        val tvAvatarLetra = findViewById<TextView>(R.id.tvAvatarLetra)
                         ivFotoPerfil?.setImageURI(Uri.parse(selectedFotoUri))
                         ivFotoPerfil?.visibility = View.VISIBLE
                         tvAvatarLetra?.visibility = View.GONE
                     } catch (e: Exception) {
-                        // ignore
+                        ivFotoPerfil?.visibility = View.GONE
+                        tvAvatarLetra?.visibility = View.VISIBLE
                     }
+                } else {
+                    ivFotoPerfil?.visibility = View.GONE
+                    tvAvatarLetra?.visibility = View.VISIBLE
                 }
             }
         }

@@ -4,8 +4,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import android.widget.RadioButton
-import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -26,41 +24,25 @@ class ResumenActivity : AppCompatActivity() {
         val items = Datos.itemsCarrito
         val total = items.sumOf { it.producto.precio * it.cantidad }
         val tvMensaje = findViewById<TextView>(R.id.tvMensaje)
-        val rgMetodoPago = findViewById<RadioGroup>(R.id.rgMetodoPago)
-        val rbEfectivo = findViewById<RadioButton>(R.id.rbEfectivo)
-        val llInfoTransferencia = findViewById<View>(R.id.llInfoTransferencia)
+        val puntoEntrega = intent.getStringExtra("puntoEntrega") ?: "Edificio 1"
+        val metodoPago = intent.getStringExtra("metodoPago") ?: "Efectivo"
 
         var usuarioObj: Usuario? = null
 
         fun construirMensaje() {
-            val esEfectivo = rbEfectivo.isChecked
-            val metodoPagoStr = if (esEfectivo) "Efectivo 💵" else "Transferencia 💳"
-
             mensajePedido = buildString {
-                append("🍬 ¡Hola! Me gustaría hacer el siguiente pedido en Jay's Candy's: 🍭\n\n")
-                append("🛍️ *Productos:*\n")
+                append("Hola, quiero hacer un pedido:\n\n")
                 items.forEach {
-                    append("• ${it.cantidad} × ${it.producto.nombre} (${it.producto.presentacion}) — ${(it.producto.precio * it.cantidad).pesos()}\n")
+                    append("${it.cantidad} × ${it.producto.nombre} — ${(it.producto.precio * it.cantidad).pesos()}\n")
                 }
-                append("\n💰 *Total a pagar:* ${total.pesos()}")
-                append("\n💳 *Método de Pago:* $metodoPagoStr")
-                append("\n\n👤 *Datos del Cliente:*")
-                append("\n• Nombre: ${usuarioObj?.nombre ?: "Cliente"}")
-                append("\n• Teléfono: ${usuarioObj?.telefono ?: "N/A"}")
-                append("\n• Edificio: ${usuarioObj?.edificio?.ifBlank { "N/A" } ?: "N/A"}")
-                append("\n• Carrera: ${usuarioObj?.carrera?.ifBlank { "N/A" } ?: "N/A"}")
-                append("\n\n✨ ¡Quedo atento a la confirmación! Gracias.")
+                append("Punto de entrega: $puntoEntrega\n")
+                append("Total: ${total.pesos()}\n")
+                append("Pago: $metodoPago\n")
+                val clienteNombre = usuarioObj?.nombre ?: "Cliente"
+                val clienteTel = usuarioObj?.telefono ?: "N/A"
+                append("Cliente: $clienteNombre · $clienteTel")
             }
             tvMensaje.text = mensajePedido
-        }
-
-        rgMetodoPago.setOnCheckedChangeListener { _, checkedId ->
-            if (checkedId == R.id.rbTransferencia) {
-                llInfoTransferencia.visibility = View.VISIBLE
-            } else {
-                llInfoTransferencia.visibility = View.GONE
-            }
-            construirMensaje()
         }
 
         lifecycleScope.launch {

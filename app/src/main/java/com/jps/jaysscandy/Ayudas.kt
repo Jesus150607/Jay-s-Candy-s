@@ -112,6 +112,12 @@ fun Activity.llenarProductos(grid: GridLayout, lista: List<Producto>, alAbrir: (
         v.findViewById<TextView>(R.id.tvPresentacion).text = p.presentacion
         v.findViewById<TextView>(R.id.tvPrecio).text = p.precio.pesos()
 
+        if (p.stock <= 0) {
+            v.alpha = 0.5f
+        } else {
+            v.alpha = 1.0f
+        }
+
         val corazon = v.findViewById<ImageView>(R.id.ivCorazon)
         fun pintar() {
             corazon.setImageResource(if (p.favorito) R.drawable.ic_corazon else R.drawable.ic_corazon_borde)
@@ -132,13 +138,13 @@ fun Activity.llenarProductos(grid: GridLayout, lista: List<Producto>, alAbrir: (
 
         v.findViewById<View>(R.id.btnMas).setOnClickListener {
             if (p.stock <= 0) {
-                Toast.makeText(this, "Producto agotado", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Stock insuficiente", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            val existente = Datos.itemsCarrito.find { it.producto.nombre == p.nombre }
+            val existente = Datos.itemsCarrito.find { it.producto.id == p.id || it.producto.nombre == p.nombre }
             val cantActual = existente?.cantidad ?: 0
             if (cantActual + 1 > p.stock) {
-                Toast.makeText(this, "Llegaste al límite del stock disponible (${p.stock})", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Stock insuficiente", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             if (existente != null) {
@@ -149,7 +155,12 @@ fun Activity.llenarProductos(grid: GridLayout, lista: List<Producto>, alAbrir: (
             Toast.makeText(this, "${p.nombre} agregado al carrito", Toast.LENGTH_SHORT).show()
             (this as? CatalogoActivity)?.actualizarBarraCarrito()
         }
-        v.setOnClickListener { alAbrir(p) }
+        v.setOnClickListener {
+            if (p.stock <= 0) {
+                Toast.makeText(this, "Stock insuficiente", Toast.LENGTH_SHORT).show()
+            }
+            alAbrir(p)
+        }
 
         val lp = GridLayout.LayoutParams(
             GridLayout.spec(GridLayout.UNDEFINED, 1f),
@@ -163,6 +174,7 @@ fun Activity.llenarProductos(grid: GridLayout, lista: List<Producto>, alAbrir: (
 
 fun Activity.abrirDetalle(p: Producto) {
     startActivity(Intent(this, DetalleActivity::class.java).apply {
+        putExtra("id", p.id)
         putExtra("nombre", p.nombre)
         putExtra("presentacion", p.presentacion)
         putExtra("precio", p.precio)

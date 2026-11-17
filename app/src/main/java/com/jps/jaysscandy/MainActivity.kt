@@ -87,12 +87,23 @@ class MainActivity : AppCompatActivity() {
 
     private fun cargarDatosUsuario() {
         lifecycleScope.launch {
-            val id = Graph.sesion.usuarioId()
-            val usuario = id?.let { Graph.usuarios.obtenerPorId(it) }
-            if (usuario != null) {
-                val tvSaludo = findViewById<TextView>(R.id.tvSaludo)
-                val primerNombre = usuario.nombre.split(" ").firstOrNull { it.isNotBlank() } ?: usuario.nombre
-                tvSaludo.text = "Hola, $primerNombre"
+            try {
+                Graph.iniciar(this@MainActivity)
+                val id = Graph.sesion.usuarioId()
+                val usuario = id?.let { Graph.usuarios.obtenerPorId(it) }
+                if (usuario != null) {
+                    val tvSaludo = findViewById<TextView>(R.id.tvSaludo)
+                    val primerNombre = usuario.nombre.split(" ").firstOrNull { it.isNotBlank() } ?: usuario.nombre
+                    tvSaludo.text = "Hola, $primerNombre"
+                }
+
+                val productos = Graph.productos.obtenerTodos()
+                findViewById<TextView>(R.id.tvCantGalletas)?.text = "${productos.count { it.categoria == "Galletas" }} productos"
+                findViewById<TextView>(R.id.tvCantGolosinas)?.text = "${productos.count { it.categoria == "Golosinas" }} productos"
+                findViewById<TextView>(R.id.tvCantFrituras)?.text = "${productos.count { it.categoria == "Frituras" }} productos"
+                findViewById<TextView>(R.id.tvCantChocolates)?.text = "${productos.count { it.categoria == "Chocolates" }} productos"
+            } catch (e: Exception) {
+                // ignore
             }
         }
     }

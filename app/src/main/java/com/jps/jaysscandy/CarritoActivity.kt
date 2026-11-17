@@ -1,5 +1,8 @@
 package com.jps.jaysscandy
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -13,6 +16,8 @@ import androidx.appcompat.app.AppCompatActivity
 class CarritoActivity : AppCompatActivity() {
 
     private val items = Datos.itemsCarrito
+    private var puntoEntregaSeleccionado: String = "Edificio 1"
+    private var metodoPagoSeleccionado: String = "Efectivo"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,17 +27,83 @@ class CarritoActivity : AppCompatActivity() {
         configurarBarra(0)
         configurarEncabezado("Mi carrito", "", atras = false)
 
+        configurarPuntosEntrega()
+        configurarMetodosPago()
+
+        findViewById<View>(R.id.btnCopiarClabe)?.setOnClickListener {
+            val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            val clip = ClipData.newPlainText("CLABE", "012345678901234567")
+            clipboard.setPrimaryClip(clip)
+            Toast.makeText(this, "CLABE copiada al portapapeles", Toast.LENGTH_SHORT).show()
+        }
+
         findViewById<View>(R.id.btnVaciar).setOnClickListener {
             items.clear()
             renderCarrito()
         }
+
         findViewById<View>(R.id.btnPedirWhatsApp).setOnClickListener {
             if (items.isEmpty()) {
                 Toast.makeText(this, "Tu carrito está vacío", Toast.LENGTH_SHORT).show()
             } else {
-                startActivity(Intent(this, ResumenActivity::class.java))
+                startActivity(
+                    Intent(this, ResumenActivity::class.java)
+                        .putExtra("puntoEntrega", puntoEntregaSeleccionado)
+                        .putExtra("metodoPago", metodoPagoSeleccionado)
+                )
             }
         }
+    }
+
+    private fun configurarPuntosEntrega() {
+        val btnE1 = findViewById<TextView>(R.id.btnEdif1)
+        val btnE2 = findViewById<TextView>(R.id.btnEdif2)
+        val btnE3 = findViewById<TextView>(R.id.btnEdif3)
+        val btnQueso = findViewById<TextView>(R.id.btnDelQueso)
+
+        val chips = listOf(
+            btnE1 to "Edificio 1",
+            btnE2 to "Edificio 2",
+            btnE3 to "Edificio 3",
+            btnQueso to "El Queso"
+        )
+
+        fun seleccionar(chipText: String) {
+            puntoEntregaSeleccionado = chipText
+            chips.forEach { (view, text) ->
+                val activo = text == chipText
+                view?.setBackgroundResource(if (activo) R.drawable.bg_boton_azul else R.drawable.bg_tarjeta)
+                view?.setTextColor(getColor(if (activo) R.color.blanco else R.color.azul_oscuro))
+            }
+        }
+
+        chips.forEach { (view, text) ->
+            view?.setOnClickListener { seleccionar(text) }
+        }
+        seleccionar("Edificio 1")
+    }
+
+    private fun configurarMetodosPago() {
+        val btnEfectivo = findViewById<View>(R.id.btnPagoEfectivo)
+        val btnTransferencia = findViewById<View>(R.id.btnPagoTransferencia)
+        val llCardTransferencia = findViewById<View>(R.id.llCardTransferencia)
+
+        fun seleccionarPago(pago: String) {
+            metodoPagoSeleccionado = pago
+            if (pago == "Efectivo") {
+                btnEfectivo?.setBackgroundResource(R.drawable.bg_boton_azul)
+                btnTransferencia?.setBackgroundResource(R.drawable.bg_tarjeta)
+                llCardTransferencia?.visibility = View.GONE
+            } else {
+                btnEfectivo?.setBackgroundResource(R.drawable.bg_tarjeta)
+                btnTransferencia?.setBackgroundResource(R.drawable.bg_boton_azul)
+                llCardTransferencia?.visibility = View.VISIBLE
+            }
+        }
+
+        btnEfectivo?.setOnClickListener { seleccionarPago("Efectivo") }
+        btnTransferencia?.setOnClickListener { seleccionarPago("Transferencia") }
+        seleccionarPago("Efectivo")
     }
 
     override fun onResume() {

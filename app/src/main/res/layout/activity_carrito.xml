@@ -66,16 +66,201 @@
                 android:orientation="vertical"
                 android:padding="18dp">
 
+                <!-- Lista de Ítems -->
                 <LinearLayout
                     android:id="@+id/llItems"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical" />
 
+                <!-- Puntos de Entrega -->
+                <TextView
+                    style="@style/Texto.Etiqueta"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Puntos de entrega"
+                    android:textSize="14sp" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/btnEdif1"
+                        style="@style/Texto.Boton"
+                        android:layout_width="0dp"
+                        android:layout_height="42dp"
+                        android:layout_marginEnd="6dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_boton_azul"
+                        android:gravity="center"
+                        android:text="Edif. 1"
+                        android:textColor="@color/blanco"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/btnEdif2"
+                        style="@style/Texto.Boton"
+                        android:layout_width="0dp"
+                        android:layout_height="42dp"
+                        android:layout_marginEnd="6dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_tarjeta"
+                        android:gravity="center"
+                        android:text="Edif. 2"
+                        android:textColor="@color/azul_oscuro"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/btnEdif3"
+                        style="@style/Texto.Boton"
+                        android:layout_width="0dp"
+                        android:layout_height="42dp"
+                        android:layout_marginEnd="6dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_tarjeta"
+                        android:gravity="center"
+                        android:text="Edif. 3"
+                        android:textColor="@color/azul_oscuro"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/btnDelQueso"
+                        style="@style/Texto.Boton"
+                        android:layout_width="0dp"
+                        android:layout_height="42dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_tarjeta"
+                        android:gravity="center"
+                        android:text="El Queso"
+                        android:textColor="@color/azul_oscuro"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <!-- Método de Pago -->
+                <TextView
+                    style="@style/Texto.Etiqueta"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Método de pago"
+                    android:textSize="14sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/btnPagoEfectivo"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_tarjeta"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/Texto.Boton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="$  Efectivo"
+                            android:textColor="@color/azul_principal"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/btnPagoTransferencia"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_boton_borde"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginEnd="6dp"
+                            android:contentDescription="@null"
+                            android:src="@drawable/ic_check"
+                            app:tint="@color/azul_principal" />
+
+                        <TextView
+                            style="@style/Texto.Boton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Transferencia"
+                            android:textColor="@color/azul_principal"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Card de Transferencia -->
+                <LinearLayout
+                    android:id="@+id/llCardTransferencia"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/bg_encabezado_curvo"
+                    android:orientation="horizontal"
+                    android:padding="14dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            style="@style/Texto.Secundario"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="CUENTA PARA TRANSFERENCIA"
+                            android:textColor="@color/verde_lima"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            style="@style/Texto.Boton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="CLABE 0123 4567 8901 2345 67"
+                            android:textColor="@color/blanco"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/btnCopiarClabe"
+                        style="@style/Texto.Boton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/bg_boton_atras"
+                        android:paddingStart="12dp"
+                        android:paddingTop="6dp"
+                        android:paddingEnd="12dp"
+                        android:paddingBottom="6dp"
+                        android:text="Copiar"
+                        android:textColor="@color/blanco"
+                        android:textSize="11sp" />
+                </LinearLayout>
+
+                <!-- Resumen Subtotal/Total -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
                     android:background="@drawable/bg_tarjeta"
                     android:elevation="2dp"
                     android:orientation="vertical"
@@ -101,34 +286,11 @@
                             android:textStyle="bold" />
                     </FrameLayout>
 
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp">
-
-                        <TextView
-                            style="@style/Texto.Secundario"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Entrega"
-                            android:textSize="12sp" />
-
-                        <TextView
-                            style="@style/Texto.Cuerpo"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="end"
-                            android:text="Se acuerda por WhatsApp"
-                            android:textColor="@color/verde_texto"
-                            android:textSize="12sp"
-                            android:textStyle="bold" />
-                    </FrameLayout>
-
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_marginTop="12dp"
-                        android:layout_marginBottom="12dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
                         android:background="@color/borde_campo" />
 
                     <FrameLayout
@@ -153,22 +315,22 @@
                     </FrameLayout>
                 </LinearLayout>
 
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnPedirWhatsApp"
+                    style="@style/BotonLima"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_marginTop="18dp"
+                    android:text="Realizar pedido por WhatsApp" />
+
                 <TextView
                     style="@style/Texto.Secundario"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="8dp"
                     android:gravity="center"
-                    android:text="Sin pagos en la app: el pago se acuerda directo con el vendedor."
-                    android:textSize="10sp" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnPedirWhatsApp"
-                    style="@style/BotonWhatsApp"
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:layout_marginTop="14dp"
-                    android:text="Realizar pedido por WhatsApp" />
+                    android:text="El pedido se finaliza y se confirma por WhatsApp"
+                    android:textSize="11sp" />
             </LinearLayout>
         </ScrollView>
     </LinearLayout>

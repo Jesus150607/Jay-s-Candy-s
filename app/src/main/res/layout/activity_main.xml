@@ -325,13 +325,14 @@
                             android:textSize="14sp" />
 
                         <TextView
+                            android:id="@+id/tvCantGalletas"
                             style="@style/Texto.Secundario"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="bottom|start"
                             android:layout_marginStart="12dp"
                             android:layout_marginBottom="10dp"
-                            android:text="20 productos"
+                            android:text="0 productos"
                             android:textColor="#CCFFFFFF"
                             android:textSize="10sp" />
 
@@ -377,13 +378,14 @@
                             android:textSize="14sp" />
 
                         <TextView
+                            android:id="@+id/tvCantGolosinas"
                             style="@style/Texto.Secundario"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="bottom|start"
                             android:layout_marginStart="12dp"
                             android:layout_marginBottom="10dp"
-                            android:text="20 productos"
+                            android:text="0 productos"
                             android:textColor="#CCFFFFFF"
                             android:textSize="10sp" />
 
@@ -436,13 +438,14 @@
                             android:textSize="14sp" />
 
                         <TextView
+                            android:id="@+id/tvCantFrituras"
                             style="@style/Texto.Secundario"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="bottom|start"
                             android:layout_marginStart="12dp"
                             android:layout_marginBottom="10dp"
-                            android:text="20 productos"
+                            android:text="0 productos"
                             android:textColor="#990A1A6B"
                             android:textSize="10sp" />
 
@@ -488,13 +491,14 @@
                             android:textSize="14sp" />
 
                         <TextView
+                            android:id="@+id/tvCantChocolates"
                             style="@style/Texto.Secundario"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="bottom|start"
                             android:layout_marginStart="12dp"
                             android:layout_marginBottom="10dp"
-                            android:text="20 productos"
+                            android:text="0 productos"
                             android:textColor="#CCFFFFFF"
                             android:textSize="10sp" />
 
