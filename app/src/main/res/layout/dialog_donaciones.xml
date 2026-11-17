@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_dialogo"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="22dp">
+
+    <ImageView
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:background="@drawable/bg_icono_amarillo"
+        android:contentDescription="@null"
+        android:padding="14dp"
+        android:src="@drawable/ic_corazon"
+        app:tint="@color/amarillo_oscuro" />
+
+    <TextView
+        style="@style/Texto.Titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="🎁 Apoya al Proyecto"
+        android:textColor="@color/azul_oscuro"
+        android:textSize="18sp" />
+
+    <TextView
+        style="@style/Texto.Secundario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:gravity="center"
+        android:text="Tu donación nos ayuda a mantener activa la aplicación para la comunidad universitaria."
+        android:textSize="12sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_tarjeta"
+        android:elevation="2dp"
+        android:orientation="vertical"
+        android:padding="14dp">
+
+        <TextView
+            style="@style/Texto.Etiqueta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Datos de Transferencia:"
+            android:textColor="@color/azul_principal"
+            android:textSize="12sp" />
+
+        <TextView
+            style="@style/Texto.Cuerpo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="• Fundación: Dulzura Escolar A.C.\n• Banco: Banamex\n• CLABE: 0021 8001 5576 2143 66"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnCopiarClabeDonacion"
+            style="@style/BotonGris"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="6dp"
+            android:layout_weight="1"
+            android:text="Copiar CLABE" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnEntendidoDonacion"
+            style="@style/BotonAzul"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="6dp"
+            android:layout_weight="1"
+            android:text="Entendido" />
+    </LinearLayout>
+</LinearLayout>

@@ -281,17 +281,23 @@ fun Activity.mostrarMenuLateral() {
 fun Activity.mostrarDialogoDonaciones() {
     val d = Dialog(this)
     d.requestWindowFeature(Window.FEATURE_NO_TITLE)
-    d.setContentView(R.layout.dialog_eliminar)
+    d.setContentView(R.layout.dialog_donaciones)
     d.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
     d.window?.setLayout((resources.displayMetrics.widthPixels * 0.85).toInt(), ViewGroup.LayoutParams.WRAP_CONTENT)
 
-    val tvMensaje = d.findViewById<TextView>(R.id.tvMensajeEliminar)
-    val btnCancelar = d.findViewById<View>(R.id.btnCancelarEliminar)
-    val btnConfirmar = d.findViewById<TextView>(R.id.btnConfirmarEliminar)
+    val btnCopiar = d.findViewById<View>(R.id.btnCopiarClabeDonacion)
+    val btnEntendido = d.findViewById<View>(R.id.btnEntendidoDonacion)
 
-    tvMensaje?.text = "🎁 Donaciones para el Proyecto\n\nTu apoyo nos ayuda a seguir manteniendo la aplicación activa para la comunidad universitaria.\n\n• Fundación: Dulzura Escolar A.C.\n• Banco: Banamex\n• CLABE: 0021 8001 5576 2143 66"
-    btnCancelar?.visibility = View.GONE
-    btnConfirmar?.text = "Entendido"
-    btnConfirmar?.setOnClickListener { d.dismiss() }
+    btnCopiar?.setOnClickListener {
+        val clipboard = getSystemService(android.content.Context.CLIPBOARD_SERVICE) as android.content.ClipboardManager
+        val clip = android.content.ClipData.newPlainText("CLABE Donaciones", "002180015576214366")
+        clipboard.setPrimaryClip(clip)
+        Toast.makeText(this, "CLABE de donación copiada al portapapeles", Toast.LENGTH_SHORT).show()
+    }
+
+    btnEntendido?.setOnClickListener {
+        d.dismiss()
+    }
+
     d.show()
 }
